@@ -42,11 +42,11 @@ class _SigninScreenState extends State<SigninScreen> {
               SizedBox(
                 height: Get.height / 20,
               ),
-              const EmailInputWidget(),
+              EmailInputWidget(),
               SizedBox(
                 height: Get.height / 40,
               ),
-              const PasswordInputWidget(),
+              PasswordInputWidget(),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.centerRight,

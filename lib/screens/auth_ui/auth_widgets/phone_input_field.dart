@@ -2,8 +2,12 @@ import 'package:e_comm/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/sign_up_controller.dart';
+
 class PhoneInputWidget extends StatelessWidget {
-  const PhoneInputWidget({super.key});
+  PhoneInputWidget({super.key});
+
+  final SignUpController signUpController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +15,7 @@ class PhoneInputWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       width: Get.width,
       child: TextFormField(
+        controller: signUpController.phoneInputController,
         cursorColor: AppConstants.appSecondaryColor,
         keyboardType: const TextInputType.numberWithOptions(decimal: false),
         decoration: InputDecoration(

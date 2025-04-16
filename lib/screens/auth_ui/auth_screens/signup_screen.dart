@@ -1,9 +1,12 @@
+import 'package:e_comm/controllers/sign_up_controller.dart';
 import 'package:e_comm/screens/auth_ui/auth_screens/signin_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/city_input_field.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/email_input_widget.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/name_input_widget.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/phone_input_field.dart';
 import 'package:e_comm/utils/app_constants.dart';
+import 'package:e_comm/utils/custom_snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
@@ -18,6 +21,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+  final SignUpController signUpController = Get.put(SignUpController());
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
@@ -48,23 +54,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: Get.height / 20,
                 ),
-                const EmailInputWidget(),
+                EmailInputWidget(),
                 SizedBox(
                   height: Get.height / 40,
                 ),
-                const NameInputWidget(),
+                NameInputWidget(),
                 SizedBox(
                   height: Get.height / 40,
                 ),
-                const PhoneInputWidget(),
+                PhoneInputWidget(),
                 SizedBox(
                   height: Get.height / 40,
                 ),
-                const CityInputWidget(),
+                CityInputWidget(),
                 SizedBox(
                   height: Get.height / 40,
                 ),
-                const PasswordInputWidget(),
+                PasswordInputWidget(),
                 SizedBox(
                   height: Get.height / 20,
                 ),
@@ -77,7 +83,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        UserCredential? userCredential = await signUpController.signUpMethod('');
+
+                        if(userCredential != null){
+                          customSnackBar("Verification Email Sent.", "Check your Email.");
+
+                          FirebaseAuth.instance.signOut();
+                          Get.offAll(() => const SigninScreen());
+
+                        }
+                      },
                       label: const Text(
                         "SIGN UP",
                         style: TextStyle(color: AppConstants.appTextColor),

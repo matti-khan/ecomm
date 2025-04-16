@@ -1,4 +1,6 @@
 
+import 'package:e_comm/screens/auth_ui/auth_screens/signin_screen.dart';
+import 'package:e_comm/screens/auth_ui/auth_screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -72,7 +74,9 @@ class WelcomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const SigninScreen());
+                  },
                   label: const Text("Sign in with Email",style: TextStyle(color: AppConstants.appTextColor),),
                   icon: const Icon(Icons.email,color: AppConstants.appTextColor,),
                 ),

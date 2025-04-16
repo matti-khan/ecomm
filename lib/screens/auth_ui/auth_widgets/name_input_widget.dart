@@ -2,8 +2,12 @@ import 'package:e_comm/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/sign_up_controller.dart';
+
 class NameInputWidget extends StatelessWidget {
-  const NameInputWidget({super.key});
+  NameInputWidget({super.key});
+
+  final SignUpController signUpController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +15,7 @@ class NameInputWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       width: Get.width,
       child: TextFormField(
+        controller: signUpController.nameInputController,
         cursorColor: AppConstants.appSecondaryColor,
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
