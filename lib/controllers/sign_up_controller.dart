@@ -31,7 +31,6 @@ class SignUpController extends GetxController {
     super.onClose();
   }
 
-
   Future<UserCredential?> signUpMethod(
     String userDeviceToken,
   ) async {
@@ -46,17 +45,17 @@ class SignUpController extends GetxController {
 
         UserCredential userCredential =
             await _auth.createUserWithEmailAndPassword(
-          email: emailInputController.value.text.trim(),
-          password: passwordInputController.value.text.trim(),
+          email: emailInputController.text.trim(),
+          password: passwordInputController.text.trim(),
         );
 
         await userCredential.user!.sendEmailVerification();
 
         UserModel userModel = UserModel(
           uId: userCredential.user!.uid,
-          username: nameInputController.value.text,
-          email: emailInputController.value.text,
-          phone: phoneInputController.value.text,
+          username: nameInputController.text,
+          email: emailInputController.text,
+          phone: phoneInputController.text,
           userImg: '',
           userDeviceToken: userDeviceToken,
           country: '',
@@ -65,7 +64,7 @@ class SignUpController extends GetxController {
           isAdmin: false,
           isActive: true,
           createdOn: DateTime.now(),
-          city: cityInputController.value.text,
+          city: cityInputController.text,
         );
 
         firebaseFirestore
@@ -85,7 +84,7 @@ class SignUpController extends GetxController {
       EasyLoading.dismiss();
       if (kDebugMode) print("Error $e\nStack Trace $s");
       customSnackBar("Error", "$e");
+      return null;
     }
-    return null;
   }
 }

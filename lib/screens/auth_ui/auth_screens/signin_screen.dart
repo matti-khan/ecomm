@@ -7,6 +7,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../controllers/sign_up_controller.dart';
 import '../auth_widgets/password_input_widget.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -17,6 +18,9 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+
+  final SignUpController signUpController = Get.put(SignUpController());
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
@@ -42,11 +46,11 @@ class _SigninScreenState extends State<SigninScreen> {
               SizedBox(
                 height: Get.height / 20,
               ),
-              EmailInputWidget(),
+              EmailInputWidget(controller: TextEditingController(),),
               SizedBox(
                 height: Get.height / 40,
               ),
-              PasswordInputWidget(),
+              PasswordInputWidget(getxController: signUpController,),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.centerRight,

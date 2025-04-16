@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import '../../../controllers/sign_up_controller.dart';
 
 class EmailInputWidget extends StatelessWidget {
-  EmailInputWidget({super.key});
+  const EmailInputWidget({super.key, required this.controller});
 
-  final SignUpController signUpController = Get.put(SignUpController());
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class EmailInputWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       width: Get.width,
       child: TextFormField(
-        controller: signUpController.emailInputController,
+        controller: controller,
         cursorColor: AppConstants.appSecondaryColor,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(

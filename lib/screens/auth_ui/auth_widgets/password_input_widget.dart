@@ -2,39 +2,43 @@ import 'package:e_comm/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/sign_up_controller.dart';
-
 class PasswordInputWidget extends StatelessWidget {
-  PasswordInputWidget({super.key});
+  final GetxController getxController;
 
-  final SignUpController signUpController = Get.put(SignUpController());
+  const PasswordInputWidget({super.key, required this.getxController});
 
   @override
   Widget build(BuildContext context) {
+
+    final controller = getxController as dynamic;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
-      width: Get.width,
+      width: double.infinity,
       child: Obx(() => TextFormField(
-            controller: signUpController.passwordInputController,
-            obscureText: signUpController.isPasswordVisible.value,
-            cursorColor: AppConstants.appSecondaryColor,
-            keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: const Icon(Icons.password),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    signUpController.isPasswordVisible.toggle();
-                  },
-                  child: signUpController.isPasswordVisible.value
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility),
-                ),
-                contentPadding: const EdgeInsets.only(top: 2, left: 8),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                )),
-          )),
+        controller: controller.passwordInputController,
+        obscureText: controller.isPasswordVisible.value,
+        cursorColor: AppConstants.appSecondaryColor,
+        keyboardType: TextInputType.visiblePassword,
+        decoration: InputDecoration(
+          hintText: "Password",
+          prefixIcon: const Icon(Icons.lock),
+          suffixIcon: GestureDetector(
+            onTap: () {
+              controller.isPasswordVisible.toggle();
+            },
+            child: Icon(
+              controller.isPasswordVisible.value
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+            ),
+          ),
+          contentPadding: const EdgeInsets.only(top: 2, left: 8),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      )),
     );
   }
 }

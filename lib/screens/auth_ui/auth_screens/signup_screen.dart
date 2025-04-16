@@ -54,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: Get.height / 20,
                 ),
-                EmailInputWidget(),
+                EmailInputWidget(controller: signUpController.emailInputController,),
                 SizedBox(
                   height: Get.height / 40,
                 ),
@@ -70,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: Get.height / 40,
                 ),
-                PasswordInputWidget(),
+                PasswordInputWidget(getxController: signUpController,),
                 SizedBox(
                   height: Get.height / 20,
                 ),
