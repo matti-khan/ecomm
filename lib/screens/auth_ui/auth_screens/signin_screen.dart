@@ -1,4 +1,5 @@
 import 'package:e_comm/res/assets/image_assets.dart';
+import 'package:e_comm/screens/auth_ui/auth_screens/forget_password_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_screens/signup_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/email_input_widget.dart';
 import 'package:e_comm/screens/user_ui/main_screen.dart';
@@ -63,11 +64,16 @@ class _SigninScreenState extends State<SigninScreen> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.centerRight,
-                  child: const Text(
-                    "Forget Password?",
-                    style: TextStyle(
-                        color: AppConstants.appSecondaryColor,
-                        fontWeight: FontWeight.bold),
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(() => const ForgetPasswordScreen());
+                    },
+                    child: const Text(
+                      "Forget Password?",
+                      style: TextStyle(
+                          color: AppConstants.appSecondaryColor,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 SizedBox(
