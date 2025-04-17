@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     child: TextButton.icon(
                       onPressed: () async {
-                        UserCredential? userCredential = await signUpController.signUpMethod('');
+                        UserCredential? userCredential = await signUpController.signUpMethod();
 
                         if(userCredential != null){
                           customSnackBar("Verification Email Sent.", "Check your Email.");

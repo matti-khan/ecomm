@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../utils/custom_snackbar.dart';
+import 'device_token_controller.dart';
 
 class SignUpController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,9 +32,10 @@ class SignUpController extends GetxController {
     super.onClose();
   }
 
-  Future<UserCredential?> signUpMethod(
-    String userDeviceToken,
-  ) async {
+  Future<UserCredential?> signUpMethod() async {
+
+    final DeviceTokenController deviceTokenController = Get.put(DeviceTokenController());
+
     try {
       if (nameInputController.text.isNotEmpty &&
           emailInputController.text.isNotEmpty &&
@@ -57,7 +59,7 @@ class SignUpController extends GetxController {
           email: emailInputController.text,
           phone: phoneInputController.text,
           userImg: '',
-          userDeviceToken: userDeviceToken,
+          userDeviceToken: deviceTokenController.deviceToken.toString(),
           country: '',
           userAddress: '',
           street: '',
