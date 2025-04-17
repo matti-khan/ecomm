@@ -112,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(color: AppConstants.appSecondaryColor),
                     ),
                     GestureDetector(
-                      onTap: () => Get.offAll(() => const SigninScreen()),
+                      onTap: () => Get.off(() => const SigninScreen()),
                       child: const Text(
                         " Sign In",
                         style: TextStyle(
