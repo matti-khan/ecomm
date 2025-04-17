@@ -1,4 +1,6 @@
+import 'package:e_comm/controllers/user_data_controller.dart';
 import 'package:e_comm/res/assets/image_assets.dart';
+import 'package:e_comm/screens/admin_ui/admin_main_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_screens/forget_password_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_screens/signup_screen.dart';
 import 'package:e_comm/screens/auth_ui/auth_widgets/email_input_widget.dart';
@@ -12,7 +14,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../controllers/sign_in_controller.dart';
-import '../../../controllers/sign_up_controller.dart';
 import '../auth_widgets/password_input_widget.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
 
   final SignInController signInController = Get.put(SignInController());
+  final UserDataController userDataController = Get.put(UserDataController());
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +92,20 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: TextButton.icon(
                       onPressed: () async {
                         UserCredential? userCredential= await signInController.signInMethod('');
+
                         if(userCredential != null){
+
+                          var userData = await userDataController.getUserData(userCredential.user!.uid);
+
                           if(userCredential.user!.emailVerified){
-                            customSnackBar("Success", "Login Successfully!");
-                            Get.offAll(() => const MainScreen());
+
+                            if(userData[0]['isAdmin'] == true){
+                              Get.offAll(() => const AdminMainScreen());
+                              customSnackBar("Success", "Admin Login Successfully!");
+                            }else{
+                              Get.offAll(() => const MainScreen());
+                              customSnackBar("Success", "Login Successfully!");
+                            }
                           }else{
                             customSnackBar("Error", "Please verify your email before login.");
                           }

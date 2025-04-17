@@ -17,7 +17,7 @@ class PasswordInputWidget extends StatelessWidget {
       width: double.infinity,
       child: Obx(() => TextFormField(
         controller: controller.passwordInputController,
-        obscureText: controller.isPasswordVisible.value,
+        obscureText: !(controller.isPasswordVisible as RxBool).value,
         cursorColor: AppConstants.appSecondaryColor,
         keyboardType: TextInputType.visiblePassword,
         decoration: InputDecoration(
@@ -25,10 +25,10 @@ class PasswordInputWidget extends StatelessWidget {
           prefixIcon: const Icon(Icons.lock),
           suffixIcon: GestureDetector(
             onTap: () {
-              controller.isPasswordVisible.toggle();
+              (controller.isPasswordVisible as RxBool).toggle();
             },
             child: Icon(
-              controller.isPasswordVisible.value
+              (controller.isPasswordVisible as RxBool).value
                   ? Icons.visibility
                   : Icons.visibility_off,
             ),
