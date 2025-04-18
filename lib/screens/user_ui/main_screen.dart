@@ -1,6 +1,7 @@
 import 'package:e_comm/screens/auth_ui/auth_screens/welcome_screen.dart';
 import 'package:e_comm/utils/app_constants.dart';
 import 'package:e_comm/widgets/banner_widget.dart';
+import 'package:e_comm/widgets/category_widget.dart';
 import 'package:e_comm/widgets/heading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,13 @@ class MainScreen extends StatelessWidget {
               BannerWidget(),
               HeadingWidget(
                 title: 'Categories',
+                subTitle: 'According to your Budget',
+                buttonText: 'See More >',
+                onTap: () {},
+              ),
+              CategoryWidget(),
+              HeadingWidget(
+                title: 'Flash Sale',
                 subTitle: 'According to your Budget',
                 buttonText: 'See More >',
                 onTap: () {},
