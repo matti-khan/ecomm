@@ -1,6 +1,7 @@
 import 'package:e_comm/screens/auth_ui/auth_screens/welcome_screen.dart';
 import 'package:e_comm/utils/app_constants.dart';
 import 'package:e_comm/widgets/banner_widget.dart';
+import 'package:e_comm/widgets/heading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,17 +18,28 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: AppConstants.appTextColor),
         backgroundColor: AppConstants.appMainColor,
-        title: Text(AppConstants.appMainName,style: const TextStyle(color: AppConstants.appTextColor),),
+        title: Text(
+          AppConstants.appMainName,
+          style: const TextStyle(color: AppConstants.appTextColor),
+        ),
         centerTitle: true,
       ),
       drawer: const CustomDrawerWidget(),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
           child: Column(
             children: [
-              SizedBox(height: Get.height / 90 ,),
+              SizedBox(
+                height: Get.height / 90,
+              ),
               BannerWidget(),
+              HeadingWidget(
+                title: 'Categories',
+                subTitle: 'According to your Budget',
+                buttonText: 'See More >',
+                onTap: () {},
+              ),
             ],
           ),
         ),

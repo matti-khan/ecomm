@@ -44,8 +44,8 @@ class _BannerWidgetState extends State<BannerWidget> {
             scrollDirection: Axis.horizontal,
             autoPlay: true,
             aspectRatio: 2.5,
-            viewportFraction: 0.8,
-            enlargeCenterPage: true
+            viewportFraction: 1,
+            // enlargeCenterPage: true
           ),
         );
       }),
