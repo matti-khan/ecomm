@@ -60,13 +60,6 @@ class FlashSaleWidget extends StatelessWidget {
                       createdAt: productData['createdAt'],
                       updatedAt: productData['updatedAt'],
                     );
-                    // CategoriesModel categoriesModel = CategoriesModel(
-                    //   categoryId: snapshot.data!.docs[index]['categoryId'],
-                    //   categoryImg: snapshot.data!.docs[index]['categoryImg'],
-                    //   categoryName: snapshot.data!.docs[index]['categoryName'],
-                    //   createdAt: snapshot.data!.docs[index]['createdAt'],
-                    //   updatedAt: snapshot.data!.docs[index]['updatedAt'],
-                    // );
                     return Row(
                       children: [
                         Padding(

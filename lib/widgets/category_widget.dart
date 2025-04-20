@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/models/categories_model.dart';
+import 'package:e_comm/screens/user_ui/single_category_product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,15 +50,18 @@ class CategoryWidget extends StatelessWidget {
                     );
                     return Row(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Container(
-                            child: FillImageCard(
-                              width: Get.width / 4,
-                              heightImage: Get.height / 10,
-                              borderRadius: 20,
-                              imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
-                              title: Center(child: Text(categoriesModel.categoryName,style: TextStyle(fontSize: 12),)),
+                        GestureDetector(
+                          onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId: categoriesModel.categoryId)),
+                          child: Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Container(
+                              child: FillImageCard(
+                                width: Get.width / 4,
+                                heightImage: Get.height / 10,
+                                borderRadius: 20,
+                                imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
+                                title: Center(child: Text(categoriesModel.categoryName,style: TextStyle(fontSize: 12),)),
+                              ),
                             ),
                           ),
                         ),

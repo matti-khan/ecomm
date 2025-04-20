@@ -1,5 +1,9 @@
 import 'package:e_comm/screens/auth_ui/auth_screens/welcome_screen.dart';
+import 'package:e_comm/screens/user_ui/all_categories_screen.dart';
+import 'package:e_comm/screens/user_ui/all_flash_sale_products_screen.dart';
+import 'package:e_comm/screens/user_ui/all_products_screen.dart';
 import 'package:e_comm/utils/app_constants.dart';
+import 'package:e_comm/widgets/all_products_widget.dart';
 import 'package:e_comm/widgets/banner_widget.dart';
 import 'package:e_comm/widgets/category_widget.dart';
 import 'package:e_comm/widgets/flash_sale_widget.dart';
@@ -40,16 +44,24 @@ class MainScreen extends StatelessWidget {
                 title: 'Categories',
                 subTitle: 'According to your Budget',
                 buttonText: 'See More >',
-                onTap: () {},
+                onTap: () => Get.to(() => AllCategoriesScreen()),
               ),
               CategoryWidget(),
               HeadingWidget(
                 title: 'Flash Sale',
                 subTitle: 'According to your Budget',
                 buttonText: 'See More >',
-                onTap: () {},
+                onTap: () => Get.to(() => const AllFlashSaleProductsScreen()),
               ),
               FlashSaleWidget(),
+              HeadingWidget(
+                title: 'All Products',
+                subTitle: 'According to your Budget',
+                buttonText: 'See More >',
+                onTap: () => Get.to(() => const AllProductsScreen()),
+              ),
+              AllProductsWidget(),
+
             ],
           ),
         ),
