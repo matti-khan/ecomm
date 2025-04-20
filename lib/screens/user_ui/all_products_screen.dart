@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
 import '../../widgets/custom_app_bar.dart';
+import 'product_detail_screen.dart';
 
 class AllProductsScreen extends StatelessWidget {
   const AllProductsScreen({super.key});
@@ -72,7 +73,7 @@ class AllProductsScreen extends StatelessWidget {
                   return Row(
                     children: [
                       GestureDetector(
-                        // onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId:categoriesModel.categoryId)),
+                        onTap: () => Get.to(() => ProductDetailScreen(productModel:productModel)),
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Container(

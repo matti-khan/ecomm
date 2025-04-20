@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/models/categories_model.dart';
 import 'package:e_comm/models/product_model.dart';
+import 'package:e_comm/screens/user_ui/product_detail_screen.dart';
 import 'package:e_comm/utils/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class AllProductsWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      // onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId:categoriesModel.categoryId)),
+                      onTap: () => Get.to(() => ProductDetailScreen(productModel:productModel)),
                       child: Padding(
                         padding: const EdgeInsets.all(8),
                         child: Container(
