@@ -9,6 +9,7 @@ import 'package:image_card/image_card.dart';
 
 import '../../models/categories_model.dart';
 import '../../widgets/custom_app_bar.dart';
+import 'product_detail_screen.dart';
 
 class SingleCategoryProductScreen extends StatefulWidget {
   final String categoryId;
@@ -84,30 +85,26 @@ class _SingleCategoryProductScreenState
                     createdAt: productData['createdAt'],
                     updatedAt: productData['updatedAt'],
                   );
-                  // CategoriesModel categoriesModel = CategoriesModel(
-                  //   categoryId: snapshot.data!.docs[index]['categoryId'],
-                  //   categoryImg: snapshot.data!.docs[index]['categoryImg'],
-                  //   categoryName: snapshot.data!.docs[index]['categoryName'],
-                  //   createdAt: snapshot.data!.docs[index]['createdAt'],
-                  //   updatedAt: snapshot.data!.docs[index]['updatedAt'],
-                  // );
                   return Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          child: FillImageCard(
-                            width: Get.width / 2.3,
-                            heightImage: Get.height / 10,
-                            borderRadius: 20,
-                            imageProvider: CachedNetworkImageProvider(
-                                productModel.productImages[0]),
-                            title: Center(
-                                child: Text(
-                              productModel.productName,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontSize: 12),
-                            )),
+                      GestureDetector(
+                        onTap: () => Get.to(() => ProductDetailScreen(productModel:productModel)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            child: FillImageCard(
+                              width: Get.width / 2.3,
+                              heightImage: Get.height / 10,
+                              borderRadius: 20,
+                              imageProvider: CachedNetworkImageProvider(
+                                  productModel.productImages[0]),
+                              title: Center(
+                                  child: Text(
+                                productModel.productName,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 12),
+                              )),
+                            ),
                           ),
                         ),
                       ),

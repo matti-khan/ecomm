@@ -78,8 +78,15 @@ class ProductDetailScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         alignment: Alignment.topLeft,
-                        child: Text(
-                          "PKR ${productModel.fullPrice}",
+                        child: Row(
+                          children: [
+                            Text(
+                              productModel.isSale == true &&
+                                      productModel.salePrice.isNotEmpty
+                                  ? "PKR ${productModel.salePrice}"
+                                  : "PKR ${productModel.fullPrice}",
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -101,48 +108,48 @@ class ProductDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Material(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: Get.width / 3,
-                              height: Get.height / 18,
-                              decoration: BoxDecoration(
-                                color: AppConstants.appSecondaryColor,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: TextButton.icon(
-                                onPressed: () {},
-                                label: const Text(
-                                  "Add to Cart",
-                                  style: TextStyle(color: AppConstants.appTextColor),
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: Get.width / 3,
+                            height: Get.height / 18,
+                            decoration: BoxDecoration(
+                              color: AppConstants.appSecondaryColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              label: const Text(
+                                "Add to Cart",
+                                style:
+                                    TextStyle(color: AppConstants.appTextColor),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: Get.width / 3,
-                              height: Get.height / 18,
-                              decoration: BoxDecoration(
-                                color: AppConstants.appSecondaryColor,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: TextButton.icon(
-                                onPressed: () {},
-                                label: const Text(
-                                  "WhatsApp",
-                                  style: TextStyle(color: AppConstants.appTextColor),
-                                ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: Get.width / 3,
+                            height: Get.height / 18,
+                            decoration: BoxDecoration(
+                              color: AppConstants.appSecondaryColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              label: const Text(
+                                "WhatsApp",
+                                style:
+                                    TextStyle(color: AppConstants.appTextColor),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

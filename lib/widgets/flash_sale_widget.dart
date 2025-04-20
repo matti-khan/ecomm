@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
+import '../screens/user_ui/product_detail_screen.dart';
+
 class FlashSaleWidget extends StatelessWidget {
   const FlashSaleWidget({super.key});
 
@@ -62,26 +64,29 @@ class FlashSaleWidget extends StatelessWidget {
                     );
                     return Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Container(
-                            child: FillImageCard(
-                              width: Get.width / 3.5,
-                              heightImage: Get.height / 10,
-                              borderRadius: 20,
-                              imageProvider: CachedNetworkImageProvider(
-                                  productModel.productImages[0]),
-                              title: Text(
-                                productModel.productName,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontSize: 10),
-                              ),
-                              footer: Row(
-                                children: [
-                                  Text("Rs ${productModel.salePrice}",style: const TextStyle(fontSize: 10),),
-                                  const SizedBox(width: 2,),
-                                  Text(productModel.fullPrice,style: const TextStyle(fontSize: 10,decoration: TextDecoration.lineThrough,color: AppConstants.appSecondaryColor),),
-                                ],
+                        GestureDetector(
+                          onTap: () => Get.to(() => ProductDetailScreen(productModel:productModel)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Container(
+                              child: FillImageCard(
+                                width: Get.width / 3.5,
+                                heightImage: Get.height / 10,
+                                borderRadius: 20,
+                                imageProvider: CachedNetworkImageProvider(
+                                    productModel.productImages[0]),
+                                title: Text(
+                                  productModel.productName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                                footer: Row(
+                                  children: [
+                                    Text("Rs ${productModel.salePrice}",style: const TextStyle(fontSize: 10),),
+                                    const SizedBox(width: 2,),
+                                    Text(productModel.fullPrice,style: const TextStyle(fontSize: 10,decoration: TextDecoration.lineThrough,color: AppConstants.appSecondaryColor),),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
