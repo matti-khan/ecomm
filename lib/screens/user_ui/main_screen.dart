@@ -32,7 +32,7 @@ class MainScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () => Get.to(() => const CartScreen()),
+            onTap: () => Get.to(() => CartScreen()),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(Icons.shopping_cart),

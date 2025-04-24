@@ -61,6 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: Get.width,
         alignment: Alignment.center,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               child: Lottie.asset(ImageAssets.splashImage),

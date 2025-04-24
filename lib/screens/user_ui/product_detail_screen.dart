@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/app_constants.dart';
+import 'cart_screen.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   ProductDetailScreen({super.key, required this.productModel});
@@ -22,7 +23,17 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Product Details"),
+      appBar: CustomAppBar(title: "Product Details",
+        actions: [
+          GestureDetector(
+            onTap: () => Get.to(() => CartScreen()),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.shopping_cart),
+            ),
+          )
+        ],
+      ),
       body: Container(
         child: Column(
           children: [
