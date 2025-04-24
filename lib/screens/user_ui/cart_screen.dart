@@ -5,7 +5,9 @@ import 'package:e_comm/utils/app_constants.dart';
 import 'package:e_comm/widgets/custom_app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
@@ -21,12 +23,12 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Cart Screen"),
-      body: FutureBuilder(
-          future: FirebaseFirestore.instance
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
               .collection('cart')
               .doc(user!.uid)
               .collection('cartOrders')
-              .get(),
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -71,36 +73,60 @@ class CartScreen extends StatelessWidget {
                       productQuantity: productData['productQuantity'],
                       productTotalPrice: productData['productTotalPrice'],
                     );
-                    return Card(
-                      color: AppConstants.appTextColor,
-                      elevation: 5,
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: AppConstants.appMainColor,
-                          backgroundImage: NetworkImage(cartModel.productImages[0]),
+                    return SwipeActionCell(
+                      key: ObjectKey(cartModel.productId),
+                      trailingActions: [
+                        SwipeAction(
+                          // title: "Delete",
+                          icon: const Icon(Icons.delete,color: Colors.red,
+                          size: 30,),
+                          color: Colors.transparent,
+                          forceAlignmentToBoundary: true,
+                          performsFirstActionWithFullSwipe: true,
+                          onTap: (CompletionHandler handler) async {
+                            if (kDebugMode) print("deleted ${cartModel.productId}");
+
+                            await FirebaseFirestore.instance
+                                .collection('cart')
+                                .doc(user!.uid)
+                                .collection('cartOrders')
+                                .doc(cartModel.productId)
+                                .delete();
+                          },
                         ),
-                        title: Text(cartModel.productName),
-                        subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text("${cartModel.productTotalPrice}"),
-                            SizedBox(
-                              width: Get.width / 20,
-                            ),
-                            CircleAvatar(
-                              radius: 14,
-                              backgroundColor: AppConstants.appMainColor,
-                              child: Text("-"),
-                            ),
-                            SizedBox(
-                              width: Get.width / 20,
-                            ),
-                            CircleAvatar(
-                              radius: 14,
-                              backgroundColor: AppConstants.appMainColor,
-                              child: Text("+"),
-                            ),
-                          ],
+                      ],
+                      child: Card(
+                        color: AppConstants.appTextColor,
+                        elevation: 5,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: AppConstants.appMainColor,
+                            backgroundImage:
+                                NetworkImage(cartModel.productImages[0]),
+                          ),
+                          title: Text(cartModel.productName),
+                          subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text("${cartModel.productTotalPrice}"),
+                              SizedBox(
+                                width: Get.width / 20,
+                              ),
+                              CircleAvatar(
+                                radius: 14,
+                                backgroundColor: AppConstants.appMainColor,
+                                child: Text("-"),
+                              ),
+                              SizedBox(
+                                width: Get.width / 20,
+                              ),
+                              CircleAvatar(
+                                radius: 14,
+                                backgroundColor: AppConstants.appMainColor,
+                                child: Text("+"),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
