@@ -38,8 +38,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                     errorWidget: (context,url,error) => const Icon(Icons.error),
                   ),
                 ),
-              )
-              .toList(),
+              ).toList(),
           options: CarouselOptions(
             scrollDirection: Axis.horizontal,
             autoPlay: true,

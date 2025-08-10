@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/controllers/product_price_controller.dart';
 import 'package:e_comm/models/cart_model.dart';
+import 'package:e_comm/screens/user_ui/user_widgets/bottom%20_sheet_input_widget.dart';
 import 'package:e_comm/utils/app_constants.dart';
 import 'package:e_comm/widgets/custom_app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,19 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 
-import 'checkout_screen.dart';
-
-
-class CartScreen extends StatelessWidget {
-  CartScreen({super.key});
+class CheckoutScreen extends StatelessWidget {
+  CheckoutScreen({super.key});
 
   User? user = FirebaseAuth.instance.currentUser;
-  final ProductPriceController productPriceController = Get.put(ProductPriceController());
+  final ProductPriceController productPriceController =
+      Get.put(ProductPriceController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Cart Screen"),
+      appBar: const CustomAppBar(title: "Checkout Screen"),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('cart')
@@ -121,34 +120,6 @@ class CartScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () async {
-                                  if (cartModel.productQuantity > 1) {
-                                    await FirebaseFirestore.instance
-                                        .collection('cart')
-                                        .doc(user!.uid)
-                                        .collection('cartOrders')
-                                        .doc(cartModel.productId)
-                                        .update({
-                                      'productQuantity':
-                                          cartModel.productQuantity - 1,
-                                      'productTotalPrice': cartModel.isSale
-                                          ? (double.parse(cartModel.salePrice) *
-                                              (cartModel.productQuantity - 1))
-                                          : (double.parse(cartModel.fullPrice) *
-                                              (cartModel.productQuantity - 1)),
-                                    });
-                                  }
-                                },
-                                child: const CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: AppConstants.appMainColor,
-                                  child: Text("-"),
-                                ),
-                              ),
-                              SizedBox(
-                                width: Get.width / 20,
-                              ),
-                              GestureDetector(
-                                onTap: () async {
                                   if (cartModel.productQuantity > 0) {
                                     await FirebaseFirestore.instance
                                         .collection('cart')
@@ -157,12 +128,16 @@ class CartScreen extends StatelessWidget {
                                         .doc(cartModel.productId)
                                         .update({
                                       'productQuantity':
-                                      cartModel.productQuantity + 1,
+                                          cartModel.productQuantity + 1,
                                       'productTotalPrice': cartModel.isSale
-                                          ? double.parse(cartModel.salePrice) + double.parse(cartModel.salePrice) *
-                                          (cartModel.productQuantity)
-                                          : double.parse(cartModel.fullPrice) + double.parse(cartModel.fullPrice) *
-                                          (cartModel.productQuantity),
+                                          ? double.parse(cartModel.salePrice) +
+                                              double.parse(
+                                                      cartModel.salePrice) *
+                                                  (cartModel.productQuantity)
+                                          : double.parse(cartModel.fullPrice) +
+                                              double.parse(
+                                                      cartModel.fullPrice) *
+                                                  (cartModel.productQuantity),
                                     });
                                   }
                                 },
@@ -250,19 +225,22 @@ class CartScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Obx(() => Text.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(
-                    text: "Total: ",
-                  ),
-                  TextSpan(
-                    text: "${productPriceController.totalPrice.value.toStringAsFixed(1)} PKR",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
+            Obx(
+              () => Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: "Total: ",
+                    ),
+                    TextSpan(
+                      text:
+                          "${productPriceController.totalPrice.value.toStringAsFixed(1)} PKR",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-            ),),
+            ),
             Material(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -275,10 +253,10 @@ class CartScreen extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      Get.to(() => CheckoutScreen());
+                      showCustomBottomSheet();
                     },
                     child: const Text(
-                      "Checkout",
+                      "Confirm Order",
                       style: TextStyle(color: AppConstants.appTextColor),
                     ),
                   ),
@@ -288,6 +266,45 @@ class CartScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showCustomBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        height: Get.height * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              BottomSheetInputWidget(),
+              BottomSheetInputWidget(
+                keyboardType: TextInputType.phone,
+              ),
+              BottomSheetInputWidget(),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppConstants.appMainColor),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(10))
+                ),
+                  onPressed: () {},
+                  child: const Text(
+                    "Place Order",
+                    style: TextStyle(color: Colors.white),
+                  ))
+            ],
+          ),
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 6,
+      isDismissible: true,
+      enableDrag: true,
     );
   }
 }
