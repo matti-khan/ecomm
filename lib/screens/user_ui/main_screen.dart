@@ -16,11 +16,22 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../widgets/custom_drawer_widget.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatefulWidget {
+  final String? userName;
+  final String? userPic;
+  const MainScreen({super.key,this.userName,this.userPic});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    print("user name: ${widget.userName}");
+    print("user pic: ${widget.userPic}");
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: AppConstants.appTextColor),
@@ -40,7 +51,7 @@ class MainScreen extends StatelessWidget {
           )
         ],
       ),
-      drawer: const CustomDrawerWidget(),
+      drawer: CustomDrawerWidget(userName: widget.userName,userPic: widget.userPic,),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(

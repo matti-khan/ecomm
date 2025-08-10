@@ -22,7 +22,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Cart Screen"),
+      appBar: const CustomAppBar(title: "Cart"),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('cart')

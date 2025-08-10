@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 1), (){
+    Timer(const Duration(seconds: 2), (){
       loggedIn(context);
     });
   }
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(userData[0]['isAdmin'] == true){
         Get.offAll(()=> const AdminMainScreen());
       }else{
-        Get.offAll(()=> const MainScreen());
+        Get.offAll(()=> MainScreen(userName: userData[0]['username'],userPic: userData[0]['userImg'],));
       }
     }else{
       Get.offAll(()=> WelcomeScreen());
@@ -53,9 +53,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       backgroundColor: AppConstants.appSecondaryColor,
-      appBar: AppBar(
-        backgroundColor: AppConstants.appSecondaryColor,
-        elevation: 0,
+      floatingActionButton: Text(
+        AppConstants.appPoweredBy,
+        style: const TextStyle(
+          color: AppConstants.appTextColor,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       body: Container(
         width: Get.width,
@@ -64,14 +68,14 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              child: Lottie.asset(ImageAssets.splashImage),
+              child: Lottie.asset(ImageAssets.splashImage,repeat: false),
             ),
             Container(
               width: Get.width,
                alignment: Alignment.center,
               margin: const EdgeInsets.only(bottom: 20),
               child: Text(
-                AppConstants.appPoweredBy,
+                AppConstants.appTagLine,
                 style: const TextStyle(
                   color: AppConstants.appTextColor,
                   fontSize: 12,

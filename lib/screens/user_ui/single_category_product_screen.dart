@@ -27,13 +27,7 @@ class _SingleCategoryProductScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstants.appMainColor,
-        title: Text(
-          widget.categoryName,
-          style: TextStyle(color: AppConstants.appTextColor),
-        ),
-      ),
+      appBar: CustomAppBar(title: widget.categoryName),
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('products')

@@ -7,7 +7,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../screens/auth_ui/auth_screens/welcome_screen.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
-  const CustomDrawerWidget({super.key});
+  final String? userName;
+  final String? userPic;
+
+  const CustomDrawerWidget({super.key, this.userName, this.userPic});
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +27,25 @@ class CustomDrawerWidget extends StatelessWidget {
         child: Wrap(
           runSpacing: 10,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Text(
-                  "Matti Khan",
-                  style: TextStyle(color: AppConstants.appTextColor),
+                  userName ?? "Guest",
+                  style: const TextStyle(color: AppConstants.appTextColor),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   "Version 1.0.0",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
                 leading: CircleAvatar(
                   radius: 22,
                   backgroundColor: AppConstants.appMainColor,
-                  child: Text(
-                    "M",
-                    style: TextStyle(color: AppConstants.appTextColor),
+                  foregroundImage: userPic != null && userPic!.isNotEmpty ? NetworkImage(userPic!) : null,
+                  child: const Icon(
+                    Icons.person,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -60,8 +64,14 @@ class CustomDrawerWidget extends StatelessWidget {
                   "Home",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
-                leading: Icon(Icons.home,color: AppConstants.appTextColor,),
-                trailing: Icon(Icons.arrow_forward_rounded,color: AppConstants.appTextColor,),
+                leading: Icon(
+                  Icons.home,
+                  color: AppConstants.appTextColor,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppConstants.appTextColor,
+                ),
               ),
             ),
             const Padding(
@@ -72,8 +82,14 @@ class CustomDrawerWidget extends StatelessWidget {
                   "Products",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
-                leading: Icon(Icons.production_quantity_limits,color: AppConstants.appTextColor,),
-                trailing: Icon(Icons.arrow_forward_rounded,color: AppConstants.appTextColor,),
+                leading: Icon(
+                  Icons.production_quantity_limits,
+                  color: AppConstants.appTextColor,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppConstants.appTextColor,
+                ),
               ),
             ),
             const Padding(
@@ -84,8 +100,14 @@ class CustomDrawerWidget extends StatelessWidget {
                   "Orders",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
-                leading: Icon(Icons.shopping_bag,color: AppConstants.appTextColor,),
-                trailing: Icon(Icons.arrow_forward_rounded,color: AppConstants.appTextColor,),
+                leading: Icon(
+                  Icons.shopping_bag,
+                  color: AppConstants.appTextColor,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppConstants.appTextColor,
+                ),
               ),
             ),
             const Padding(
@@ -96,14 +118,20 @@ class CustomDrawerWidget extends StatelessWidget {
                   "Contact",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
-                leading: Icon(Icons.help,color: AppConstants.appTextColor,),
-                trailing: Icon(Icons.arrow_forward_rounded,color: AppConstants.appTextColor,),
+                leading: Icon(
+                  Icons.help,
+                  color: AppConstants.appTextColor,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppConstants.appTextColor,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListTile(
-                onTap: ()async{
+                onTap: () async {
                   GoogleSignIn googleSignIn = GoogleSignIn();
                   FirebaseAuth fireaseAuth = FirebaseAuth.instance;
 
@@ -117,8 +145,14 @@ class CustomDrawerWidget extends StatelessWidget {
                   "Logout",
                   style: TextStyle(color: AppConstants.appTextColor),
                 ),
-                leading: const Icon(Icons.logout,color: AppConstants.appTextColor,),
-                trailing: const Icon(Icons.arrow_forward_rounded,color: AppConstants.appTextColor,),
+                leading: const Icon(
+                  Icons.logout,
+                  color: AppConstants.appTextColor,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppConstants.appTextColor,
+                ),
               ),
             ),
           ],

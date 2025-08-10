@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BottomSheetInputWidget extends StatelessWidget {
-  const BottomSheetInputWidget({super.key, this.keyboardType = TextInputType.text,});
+  const BottomSheetInputWidget({super.key, this.keyboardType = TextInputType.text, required this.label,});
 
   final TextInputType keyboardType;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class BottomSheetInputWidget extends StatelessWidget {
         textInputAction: TextInputAction.next,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-          labelText: "Name",
+          labelText: label,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 10,
           ),

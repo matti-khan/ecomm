@@ -273,7 +273,7 @@ class CheckoutScreen extends StatelessWidget {
     Get.bottomSheet(
       Container(
         height: Get.height * 0.8,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(16),
@@ -282,11 +282,11 @@ class CheckoutScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              BottomSheetInputWidget(),
-              BottomSheetInputWidget(
-                keyboardType: TextInputType.phone,
+              const BottomSheetInputWidget(label: 'Receiver Name',),
+              const BottomSheetInputWidget(
+                keyboardType: TextInputType.phone, label: 'Receiver Phone No',
               ),
-              BottomSheetInputWidget(),
+              const BottomSheetInputWidget(label: 'Delivery Address',),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(AppConstants.appMainColor),
