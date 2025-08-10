@@ -41,3 +41,40 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+
+# Flutter build
+.packages
+pubspec.lock
+
+# IDE files
+.vscode/
+
+# OS files
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Firebase config (optional to ignore)
+# If your Firebase rules are secure, these can be public, but you can ignore them to be extra safe
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Firebase service account keys (NEVER commit these)
+**/serviceAccountKey.json
+**/*service-account*.json
+**/firebase-adminsdk-*.json
+
+# Any JSON with private keys
+*.keystore
+*.jks
+*.p12
+*.pem
+
+# Token/cache files
+*.token
+*.credentials
