@@ -13,8 +13,9 @@ import 'product_detail_screen.dart';
 
 class SingleCategoryProductScreen extends StatefulWidget {
   final String categoryId;
+  final String categoryName;
 
-  const SingleCategoryProductScreen({super.key, required this.categoryId});
+  const SingleCategoryProductScreen({super.key, required this.categoryId, required this.categoryName});
 
   @override
   State<SingleCategoryProductScreen> createState() =>
@@ -28,8 +29,8 @@ class _SingleCategoryProductScreenState
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstants.appMainColor,
-        title: const Text(
-          "Products",
+        title: Text(
+          widget.categoryName,
           style: TextStyle(color: AppConstants.appTextColor),
         ),
       ),

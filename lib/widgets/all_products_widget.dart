@@ -17,7 +17,7 @@ class AllProductsWidget extends StatelessWidget {
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('products')
-            .where('isSale', isEqualTo: false)
+            // .where('isSale', isEqualTo: false)
             .get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {

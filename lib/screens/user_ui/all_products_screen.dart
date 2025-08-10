@@ -21,7 +21,6 @@ class AllProductsScreen extends StatelessWidget {
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('products')
-              .where('isSale', isEqualTo: false)
               .get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -43,6 +42,8 @@ class AllProductsScreen extends StatelessWidget {
               );
             }
             if (snapshot.data != null) {
+
+              print("Total Product :: ${snapshot.data!.docs.length}");
               return GridView.builder(
                 itemCount: snapshot.data!.docs.length,
                 shrinkWrap: true,

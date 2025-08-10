@@ -66,7 +66,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                   return Row(
                     children: [
                       GestureDetector(
-                        onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId:categoriesModel.categoryId)),
+                        onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId:categoriesModel.categoryId,categoryName: categoriesModel.categoryName,)),
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Container(

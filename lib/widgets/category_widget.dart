@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
           }
           if (snapshot.data != null) {
             return Container(
-              height: Get.height / 5.5,
+              height: Get.height / 5,
               child: ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   shrinkWrap: true,
@@ -51,7 +51,7 @@ class CategoryWidget extends StatelessWidget {
                     return Row(
                       children: [
                         GestureDetector(
-                          onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId: categoriesModel.categoryId)),
+                          onTap: () => Get.to(() => SingleCategoryProductScreen(categoryId: categoriesModel.categoryId, categoryName: categoriesModel.categoryName,)),
                           child: Padding(
                             padding: EdgeInsets.all(5),
                             child: Container(
